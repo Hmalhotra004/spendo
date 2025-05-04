@@ -15,10 +15,7 @@ import {
   ViewStyle,
 } from "react-native";
 
-export type ScreenWrapperProps = {
-  style?: ViewStyle;
-  children: React.ReactNode;
-};
+
 export type ModalWrapperProps = {
   style?: ViewStyle;
   children: React.ReactNode;
@@ -31,14 +28,7 @@ export type accountOptionType = {
   routeName?: any;
 };
 
-export type TypoProps = {
-  size?: number;
-  color?: string;
-  fontWeight?: TextStyle["fontWeight"];
-  children: any | null;
-  style?: TextStyle;
-  textProps?: TextProps;
-};
+
 
 export type IconComponent = React.ComponentType<{
   height?: number;
@@ -110,13 +100,6 @@ export interface InputProps extends TextInputProps {
   inputRef?: React.RefObject<TextInput>;
   //   label?: string;
   //   error?: string;
-}
-
-export interface CustomButtonProps extends TouchableOpacityProps {
-  style?: ViewStyle;
-  onPress?: () => void;
-  loading?: boolean;
-  children: React.ReactNode;
 }
 
 export type ImageUploadProps = {

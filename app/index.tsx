@@ -1,3 +1,4 @@
+import ScreenWrapper from "@/components/ScreenWrapper";
 import { COLORS } from "@/constants/theme";
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
@@ -13,13 +14,15 @@ export default function Index() {
   });
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        resizeMode="contain"
-        source={require("@/assets/images/splashImage.png")}
-      />
-    </View>
+    <ScreenWrapper>
+      <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          resizeMode="contain"
+          source={require("@/assets/images/splashImage.png")}
+        />
+      </View>
+    </ScreenWrapper>
   );
 }
 

@@ -113,20 +113,7 @@ export type UserDataType = {
   image?: any;
 };
 
-export type AuthContextType = {
-  user: UserType;
-  setUser: Function;
-  login: (
-    email: string,
-    password: string
-  ) => Promise<{ success: boolean; msg?: string }>;
-  register: (
-    email: string,
-    password: string,
-    name: string
-  ) => Promise<{ success: boolean; msg?: string }>;
-  updateUserData: (userId: string) => Promise<void>;
-};
+
 
 export type ResponseType = {
   success: boolean;

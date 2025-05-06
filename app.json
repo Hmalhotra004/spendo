@@ -1,17 +1,18 @@
 {
   "expo": {
-    "name": "piggy-track",
-    "slug": "piggy-track",
+    "name": "Spendo",
+    "slug": "spendo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "piggytrack",
+    "scheme": "spendo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.hardik05.spendo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "abdd400d-2385-4e4f-86fb-31533159b903"
+      }
     }
   }
 }

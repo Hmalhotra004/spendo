@@ -1,20 +1,6 @@
-import { Href } from "expo-router";
-import { Firestore, Timestamp } from "firebase/firestore";
 import { Icon } from "phosphor-react-native";
 import React, { ReactNode } from "react";
-import {
-  ActivityIndicator,
-  ActivityIndicatorProps,
-  ImageStyle,
-  PressableProps,
-  TextInput,
-  TextInputProps,
-  TextProps,
-  TextStyle,
-  TouchableOpacityProps,
-  ViewStyle,
-} from "react-native";
-
+import { ViewStyle } from "react-native";
 
 export type ModalWrapperProps = {
   style?: ViewStyle;
@@ -27,8 +13,6 @@ export type accountOptionType = {
   bgColor: string;
   routeName?: any;
 };
-
-
 
 export type IconComponent = React.ComponentType<{
   height?: number;
@@ -53,14 +37,12 @@ export type HeaderProps = {
   rightIcon?: ReactNode;
 };
 
-
-
 export type TransactionType = {
   id?: string;
   type: string;
   amount: number;
   category?: string;
-  date: Date | Timestamp | string;
+  date: Date | string;
   description?: string;
   image?: any;
   uid?: string;
@@ -90,8 +72,6 @@ export type TransactionItemProps = {
   handleClick: Function;
 };
 
-
-
 export type ImageUploadProps = {
   file?: any;
   onSelect: (file: any) => void;
@@ -112,8 +92,6 @@ export type UserDataType = {
   name: string;
   image?: any;
 };
-
-
 
 export type ResponseType = {
   success: boolean;

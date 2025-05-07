@@ -4,7 +4,6 @@ import Input from "@/components/Input";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
-import { useAuth } from "@/store/authContext";
 import styles from "@/styles/login.styles";
 import { verticalScale } from "@/utils/styling";
 import { useRouter } from "expo-router";
@@ -19,7 +18,7 @@ const Register = () => {
   const passwordRef = useRef("");
 
   const router = useRouter();
-  const { register } = useAuth();
+  // const { register } = useAuth();
 
   async function handleSubmit() {
     if (!emailRef.current || !passwordRef.current || !nameRef.current) {
@@ -32,11 +31,11 @@ const Register = () => {
     const password = passwordRef.current;
 
     setIsLoading(true);
-    const response = await register(email, password, name);
-    if (response.success) {
-    } else {
-      Alert.alert("Sign Up", response.msg);
-    }
+    // const response = await register(email, password, name);
+    // if (response.success) {
+    // } else {
+    //   Alert.alert("Sign Up", response.msg);
+    // }
     setIsLoading(false);
   }
 

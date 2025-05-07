@@ -5,6 +5,7 @@ import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
 import styles from "@/styles/login.styles";
+import api from "@/utils/api";
 import { verticalScale } from "@/utils/styling";
 import { useRouter } from "expo-router";
 import { At, Lock, User } from "phosphor-react-native";
@@ -26,16 +27,21 @@ const Register = () => {
       return;
     }
 
-    const name = nameRef.current;
+    const username = nameRef.current;
     const email = emailRef.current;
     const password = passwordRef.current;
 
     setIsLoading(true);
-    // const response = await register(email, password, name);
-    // if (response.success) {
-    // } else {
-    //   Alert.alert("Sign Up", response.msg);
-    // }
+    const response = await api.post("/auth/register", {
+      email,
+      password,
+      username,
+    });
+    if (response.status === 200) {
+      Alert.alert("Sign Up", "sex");
+    } else {
+      Alert.alert("Sign Up", response.data.message);
+    }
     setIsLoading(false);
   }
 

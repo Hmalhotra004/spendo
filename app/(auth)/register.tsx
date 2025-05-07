@@ -18,7 +18,7 @@ const Register = () => {
   const passwordRef = useRef("");
 
   const router = useRouter();
-  // const { register } = useAuth();
+  const { register } = useAuth();
 
   async function handleSubmit() {
     if (!emailRef.current || !passwordRef.current || !nameRef.current) {
@@ -31,11 +31,11 @@ const Register = () => {
     const password = passwordRef.current;
 
     setIsLoading(true);
-    // const response = await register(email, password, name);
-    // if (response.success) {
-    // } else {
-    //   Alert.alert("Sign Up", response.msg);
-    // }
+    const response = await register(email, password, name);
+    if (response.success) {
+    } else {
+      Alert.alert("Sign Up", response.msg);
+    }
     setIsLoading(false);
   }
 

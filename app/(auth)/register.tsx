@@ -4,6 +4,7 @@ import Input from "@/components/Input";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
+import { useAuth } from "@/store/authContext";
 import styles from "@/styles/login.styles";
 import { verticalScale } from "@/utils/styling";
 import { useRouter } from "expo-router";

@@ -6,5 +6,5 @@ export const authentication = (salt: string, password: string) => {
   return crypto
     .createHmac("sha256", [salt, password].join("/"))
     .update("XYXlC4NseNZkqVrEYAXMqWSP2Z6GKvXvqNj8bDOg9Gc=")
-    .digest();
+    .digest("hex");
 };

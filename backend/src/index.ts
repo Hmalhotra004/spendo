@@ -5,6 +5,7 @@ import cors from "cors";
 import express from "express";
 import http from "http";
 import mongoose from "mongoose";
+import router from "./router";
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
+app.use("/", router());
+
 const server = http.createServer(app);
 
 server.listen(3000, () => {
@@ -25,5 +28,7 @@ server.listen(3000, () => {
 });
 
 mongoose.Promise = Promise;
-mongoose.connect(process.env.mongodb_url);
+mongoose.connect(
+  "mongodb+srv://hardikmalhotra150804:Z90At3GDzJb3AlXA@cluster0.banec3w.mongodb.net/spendo?retryWrites=true&w=majority&appName=Cluster0"
+);
 mongoose.connection.on("error", (error: Error) => console.log(error));

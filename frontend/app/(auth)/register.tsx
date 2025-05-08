@@ -4,22 +4,21 @@ import Input from "@/components/Input";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
+import useAuthStore from "@/store/AuthStore";
 import styles from "@/styles/login.styles";
-import api from "@/utils/api";
 import { verticalScale } from "@/utils/styling";
 import { useRouter } from "expo-router";
 import { At, Lock, User } from "phosphor-react-native";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Alert, Pressable, View } from "react-native";
 
 const Register = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const nameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
   const router = useRouter();
-  // const { register } = useAuth();
+  const { register, isLoading } = useAuthStore();
 
   async function handleSubmit() {
     if (!emailRef.current || !passwordRef.current || !nameRef.current) {
@@ -31,18 +30,13 @@ const Register = () => {
     const email = emailRef.current;
     const password = passwordRef.current;
 
-    setIsLoading(true);
-    const response = await api.post("/auth/register", {
-      email,
-      password,
-      username,
-    });
-    if (response.status === 200) {
-      Alert.alert("Sign Up", "sex");
-    } else {
-      Alert.alert("Sign Up", response.data.message);
+    const result = await register(username, email, password);
+    if (result.success) {
+      Alert.alert("Sign Up", "Registration Successfull");
+      setTimeout(() => {
+        router.replace("/(auth)/login");
+      }, 2000);
     }
-    setIsLoading(false);
   }
 
   return (

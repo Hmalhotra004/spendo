@@ -2,11 +2,6 @@ import { Icon } from "phosphor-react-native";
 import React from "react";
 import { ViewStyle } from "react-native";
 
-export type ModalWrapperProps = {
-  style?: ViewStyle;
-  children: React.ReactNode;
-  bg?: string;
-};
 export type accountOptionType = {
   title: string;
   icon: React.ReactNode;

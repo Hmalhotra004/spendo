@@ -4,9 +4,11 @@ import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
 import useAuthStore from "@/store/useAuthStore";
 import styles from "@/styles/profile.styles";
+import { accountOptionType } from "@/types";
 import accountOptions from "@/utils/accountOption";
 import { verticalScale } from "@/utils/styling";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import { CaretRight } from "phosphor-react-native";
 
 import React from "react";
@@ -15,11 +17,23 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 
 const Profile = () => {
   const { logout, user } = useAuthStore();
+  const router = useRouter();
+
   function confirmLogout() {
     Alert.alert("Logout", "Are you sure you want to logout", [
       { text: "Cancel", style: "cancel" },
       { text: "logout", onPress: () => logout(), style: "destructive" },
     ]);
+  }
+
+  async function handlePress(item: accountOptionType) {
+    if (item.title === "Logout") {
+      confirmLogout();
+    }
+
+    if (item.routeName) {
+      router.push(item.routeName);
+    }
   }
 
   return (
@@ -66,7 +80,10 @@ const Profile = () => {
                 key={idx.toString()}
                 style={styles.listItem}
               >
-                <TouchableOpacity style={styles.flexRow}>
+                <TouchableOpacity
+                  style={styles.flexRow}
+                  onPress={() => handlePress(item)}
+                >
                   <View
                     style={[styles.listIcon, { backgroundColor: item.bgColor }]}
                   >

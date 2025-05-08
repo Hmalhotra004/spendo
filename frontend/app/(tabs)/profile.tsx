@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import useAuthStore from "@/store/useAuthStore";
 import React from "react";
@@ -14,12 +15,12 @@ const Profile = () => {
   }
 
   return (
-    <View>
+    <ScreenWrapper>
       <Text>profile</Text>
       <Button onPress={confirmLogout}>
         <Typo>Logout</Typo>
       </Button>
-    </View>
+    </ScreenWrapper>
   );
 };
 

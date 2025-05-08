@@ -1,5 +1,5 @@
 import { Icon } from "phosphor-react-native";
-import React, { ReactNode } from "react";
+import React from "react";
 import { ViewStyle } from "react-native";
 
 export type ModalWrapperProps = {
@@ -28,13 +28,6 @@ export type IconProps = {
   size?: number;
   strokeWidth?: number;
   fill?: string;
-};
-
-export type HeaderProps = {
-  title?: string;
-  style?: ViewStyle;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
 };
 
 export type TransactionType = {

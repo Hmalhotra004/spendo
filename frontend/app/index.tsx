@@ -1,18 +1,8 @@
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { COLORS } from "@/constants/theme";
-import { useRouter } from "expo-router";
-import { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 
 export default function Index() {
-  const router = useRouter();
-
-  useEffect(() => {
-    setTimeout(() => {
-      router.push("/(auth)/welcome");
-    }, 2000);
-  });
-
   return (
     <ScreenWrapper>
       <View style={styles.container}>

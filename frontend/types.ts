@@ -81,10 +81,17 @@ export type ImageUploadProps = {
   placeholder?: string;
 };
 
+export type Authentication = {
+  password: string;
+  salt: string;
+  sesstionToken: string;
+};
+
 export type UserType = {
-  uid?: string;
-  email?: string | null;
-  name: string | null;
+  _id: string;
+  username: string;
+  email: string;
+  authentication: Authentication;
   image?: any;
 } | null;
 

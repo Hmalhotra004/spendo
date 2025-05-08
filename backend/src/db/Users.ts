@@ -24,6 +24,10 @@ const UserSchema = new mongoose.Schema({
       select: false,
     },
   },
+  image: {
+    type: String,
+    required: false,
+  },
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

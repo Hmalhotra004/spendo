@@ -4,27 +4,34 @@ import Input from "@/components/Input";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
+import useAuthStore from "@/store/useAuthStore";
 import styles from "@/styles/login.styles";
 import { verticalScale } from "@/utils/styling";
 import { useRouter } from "expo-router";
 import { At, Lock } from "phosphor-react-native";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Alert, Pressable, View } from "react-native";
 
 const Login = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
   const router = useRouter();
+  const { isLoading, login } = useAuthStore();
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!emailRef.current || !passwordRef.current) {
       Alert.alert("Login", "Please fill all the fields");
       return;
     }
-    console.log(emailRef.current);
-    console.log(passwordRef.current);
+
+    const email = emailRef.current;
+    const password = passwordRef.current;
+
+    const result = await login(email, password);
+    if (!result.success) {
+      Alert.alert("Error", result.error);
+    }
   }
 
   return (

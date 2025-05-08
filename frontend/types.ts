@@ -84,15 +84,15 @@ export type ImageUploadProps = {
 export type Authentication = {
   password: string;
   salt: string;
-  sesstionToken: string;
+  sessionToken: string;
 };
 
 export type UserType = {
-  _id: string;
+  id: string;
   username: string;
   email: string;
-  authentication: Authentication;
   image?: any;
+  createdAt: string;
 } | null;
 
 export type UserDataType = {

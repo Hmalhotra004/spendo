@@ -14,7 +14,7 @@ interface AuthStore {
   token: string | null;
   isLoading: boolean;
   isCheckingAuth: boolean;
-  // login: (email: string, password: string) => Promise<result>;
+  login: (email: string, password: string) => Promise<result>;
   register: (
     username: string,
     email: string,
@@ -29,6 +29,45 @@ const useAuthStore = create<AuthStore>((set) => ({
   token: null,
   isLoading: false,
   isCheckingAuth: true,
+
+  login: async (email, password) => {
+    try {
+      set({ isLoading: true });
+      const response = await api.post("/auth/login", {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
+        await AsyncStorage.setItem("user", JSON.stringify(data.user));
+        await AsyncStorage.setItem("token", data.token);
+
+        set({
+          user: data.user,
+          token: data.token,
+        });
+
+        return {
+          success: true,
+        };
+      } else {
+        console.log("this?");
+        return { success: false, error: "Something went wrong!" };
+      }
+    } catch (error) {
+      if (isAxiosError(error)) {
+        if (error.response?.status === 404 || error.response?.status === 401) {
+          return { success: false, error: error.response?.data.message };
+        }
+      }
+      console.log("that");
+      return { success: false, error: "Something went wrong" };
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 
   register: async (username, email, password) => {
     try {

@@ -35,7 +35,16 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       path: "/",
     });
 
-    return res.status(200).json(user).end();
+    return res.status(200).json({
+      token: user.authentication.sessionToken,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        image: user.image,
+        createdAt: user.createdAt,
+      },
+    });
   } catch (error) {
     console.error("LOGIN_ERROR: " + error);
     return res.status(500).json({ message: "Internal Server Error" });

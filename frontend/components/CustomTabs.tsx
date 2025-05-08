@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     borderTopColor: COLORS.neutral700,
-    borderTopEndRadius: 1,
+    borderTopWidth: 1,
   },
   tabbarItem: {
     marginBottom: Platform.OS === "ios" ? spacingY._10 : spacingY._5,

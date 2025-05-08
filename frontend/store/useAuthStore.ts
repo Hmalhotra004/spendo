@@ -40,7 +40,6 @@ const useAuthStore = create<AuthStore>((set) => ({
 
       if (response.status === 200) {
         const data = response.data;
-        console.log(data);
         await AsyncStorage.setItem("user", JSON.stringify(data.user));
         await AsyncStorage.setItem("token", data.token);
 
@@ -53,7 +52,6 @@ const useAuthStore = create<AuthStore>((set) => ({
           success: true,
         };
       } else {
-        console.log("this?");
         return { success: false, error: "Something went wrong!" };
       }
     } catch (error) {
@@ -62,7 +60,6 @@ const useAuthStore = create<AuthStore>((set) => ({
           return { success: false, error: error.response?.data.message };
         }
       }
-      console.log("that");
       return { success: false, error: "Something went wrong" };
     } finally {
       set({ isLoading: false });

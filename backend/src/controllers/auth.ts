@@ -52,7 +52,7 @@ export const register = async (req: Request, res: Response): Promise<any> => {
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.status(404).json({ message: "User Already exists" });
+      return res.status(409).json({ message: "User Already exists" });
     }
 
     const salt = random();

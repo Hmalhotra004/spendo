@@ -1,5 +1,6 @@
 import { UserType } from "@/types";
 import api from "@/utils/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { isAxiosError } from "axios";
 import { create } from "zustand";
 
@@ -12,14 +13,14 @@ interface AuthStore {
   user: UserType | null;
   token: string | null;
   isLoading: boolean;
-  // isCheckingAuth: boolean;
+  isCheckingAuth: boolean;
   // login: (email: string, password: string) => Promise<result>;
   register: (
     username: string,
     email: string,
     password: string
   ) => Promise<result>;
-  // checkAuth: () => void;
+  checkAuth: () => void;
   // logout: () => void;
 }
 
@@ -27,7 +28,7 @@ const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   token: null,
   isLoading: false,
-  // isCheckingAuth: true,
+  isCheckingAuth: true,
 
   register: async (username, email, password) => {
     try {
@@ -51,6 +52,20 @@ const useAuthStore = create<AuthStore>((set) => ({
       return { success: false, error: "Something went wrong!" };
     } finally {
       set({ isLoading: false });
+    }
+  },
+
+  checkAuth: async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      const userJson = await AsyncStorage.getItem("user");
+      const user = userJson ? JSON.parse(userJson) : null;
+
+      set({ token, user });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set({ isCheckingAuth: false });
     }
   },
 }));

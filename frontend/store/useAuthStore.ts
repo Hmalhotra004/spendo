@@ -21,7 +21,7 @@ interface AuthStore {
     password: string
   ) => Promise<result>;
   checkAuth: () => void;
-  // logout: () => void;
+  logout: () => void;
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
@@ -106,6 +106,12 @@ const useAuthStore = create<AuthStore>((set) => ({
     } finally {
       set({ isCheckingAuth: false });
     }
+  },
+
+  logout: async () => {
+    await AsyncStorage.removeItem("user");
+    await AsyncStorage.removeItem("token");
+    set({ token: null, user: null });
   },
 }));
 

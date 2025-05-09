@@ -35,7 +35,11 @@ export default function RootLayout() {
       <Stack.Screen name="(auth)" />
       <Stack.Screen
         name="(modals)/profileModal"
-        options={{ presentation: "formSheet" }}
+        options={{ presentation: "modal" }}
+      />
+      <Stack.Screen
+        name="(modals)/walletModal"
+        options={{ presentation: "modal" }}
       />
     </Stack>
   );

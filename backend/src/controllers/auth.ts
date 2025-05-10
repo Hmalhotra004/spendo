@@ -30,11 +30,6 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     await user.save();
 
-    res.cookie("AUTH", user.authentication.sessionToken, {
-      domain: "localhost",
-      path: "/",
-    });
-
     return res.status(200).json({
       token: user.authentication.sessionToken,
       user: {

@@ -5,7 +5,7 @@ import express from "express";
 import { connectDB } from "./lib/db";
 import router from "./router";
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 
@@ -24,6 +24,6 @@ app.use("/", router());
 // const server = http.createServer(app);
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:3000`);
+  console.log(`Server running on http://localhost:${PORT}`);
   connectDB();
 });

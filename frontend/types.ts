@@ -43,6 +43,7 @@ export type CategoryType = {
   icon: Icon;
   bgColor: string;
 };
+
 export type ExpenseCategoriesType = {
   [key: string]: CategoryType;
 };

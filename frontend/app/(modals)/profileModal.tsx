@@ -7,13 +7,14 @@ import Typo from "@/components/Typo";
 import { COLORS, spacingY } from "@/constants/theme";
 import useAuthStore from "@/store/useAuthStore";
 import styles from "@/styles/profileModal.styles";
+import api from "@/utils/api";
 import { isAxiosError } from "axios";
 import { Image } from "expo-image";
 import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, View } from "react-native";
 
 const ProfileModal = () => {
-  const { user } = useAuthStore();
+  const { user, setUser, token } = useAuthStore();
   const [name, setName] = useState("");
   const [loading, setloading] = useState(false);
 
@@ -23,15 +24,31 @@ const ProfileModal = () => {
 
   async function onSubmit() {
     try {
+      setloading(true);
       if (!name.trim()) {
         Alert.alert("User", "Please filll all fields");
         return;
       }
+
+      const response = await api.patch(
+        `/users/${user?.id}`,
+        {
+          username: name,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setUser(response.data.user);
+      }
     } catch (error) {
       if (isAxiosError(error)) {
-        return { success: false, error: error.response?.data.message };
+        Alert.alert("Error", error.response?.data.message);
       }
-      return { success: false, error: "Something went wrong" };
     } finally {
       setloading(false);
     }

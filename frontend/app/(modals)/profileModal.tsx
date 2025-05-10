@@ -44,6 +44,7 @@ const ProfileModal = () => {
 
       if (response.status === 200) {
         setUser(response.data.user);
+        Alert.alert("User", "Name Updated Successfully");
       }
     } catch (error) {
       if (isAxiosError(error)) {

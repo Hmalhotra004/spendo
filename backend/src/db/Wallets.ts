@@ -34,7 +34,7 @@ const WalletSchema = new mongoose.Schema(
 export const WalletModel = mongoose.model("wallet", WalletSchema);
 
 export const getAllWalletsByUserId = (id: string) =>
-  WalletModel.findById({ userId: id });
+  WalletModel.find({ userId: id });
 
 export const getWalletById = (id: string) => WalletModel.findOne({ _id: id });
 

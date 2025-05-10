@@ -4,36 +4,42 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import ModalWrapper from "@/components/ModalWrapper";
 import Typo from "@/components/Typo";
+import WalletIcon from "@/components/WalletIcon";
 import { COLORS, spacingY } from "@/constants/theme";
 import useAuthStore from "@/store/useAuthStore";
 import styles from "@/styles/profileModal.styles";
 import { WalletType } from "@/types";
 import api from "@/utils/api";
+import { walletIcons } from "@/utils/walletIcons";
 import { isAxiosError } from "axios";
-import { PiggyBank } from "phosphor-react-native";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Alert, ScrollView, View } from "react-native";
 
 const WalletModal = () => {
-  const { user, token } = useAuthStore();
+  const [loading, setloading] = useState(false);
   const [wallet, setWallet] = useState<WalletType>({
     icon: "",
     name: "",
   });
-  const [loading, setloading] = useState(false);
+
+  const { user, token } = useAuthStore();
+  const router = useRouter();
 
   async function onSubmit() {
     try {
       setloading(true);
       if (!wallet.name.trim() || !wallet.icon.trim()) {
-        Alert.alert("User", "Please filll all fields");
+        Alert.alert("User", "Please fill all fields");
+        setloading(false);
         return;
       }
 
-      const response = await api.patch(
-        `/users/${user?.id}`,
+      const response = await api.post(
+        `/wallet/${user?.id}`,
         {
-          username: name,
+          name: wallet.name,
+          icon: wallet.icon,
         },
         {
           headers: {
@@ -43,8 +49,11 @@ const WalletModal = () => {
       );
 
       if (response.status === 200) {
-        // setUser(response.data.user);
-        Alert.alert("User", "Name Updated Successfully");
+        Alert.alert("Wallet", "Wallet Created!");
+        setWallet({ name: "", icon: "" });
+        setTimeout(() => {
+          router.back();
+        }, 2000);
       }
     } catch (error) {
       if (isAxiosError(error)) {
@@ -73,11 +82,32 @@ const WalletModal = () => {
               onChangeText={(value) => setWallet({ ...wallet, name: value })}
             />
           </View>
-          <View style={{ flex: 1 }}>
-            <PiggyBank
-              color={COLORS.white}
-              size={32}
-            />
+
+          <View>
+            <Typo
+              color={COLORS.neutral200}
+              style={{ marginBottom: 10 }}
+            >
+              Choose Icon
+            </Typo>
+            <View
+              style={{
+                flexWrap: "wrap",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              {walletIcons.map((w, idx) => (
+                <WalletIcon
+                  key={idx.toString()}
+                  IconComponent={w.icon}
+                  iconName={w.icon.toString()}
+                  setWallet={setWallet}
+                  wallet={wallet}
+                />
+              ))}
+            </View>
           </View>
         </ScrollView>
       </View>

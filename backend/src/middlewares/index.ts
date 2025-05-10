@@ -36,6 +36,7 @@ export const isAuthenticated = async (
 ) => {
   try {
     const sessionToken = req.header("Authorization")?.replace("Bearer ", "");
+
     if (!sessionToken) {
       res.status(401).json({ message: "Unauthorzied" });
       return;

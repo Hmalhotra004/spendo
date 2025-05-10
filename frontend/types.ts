@@ -69,12 +69,6 @@ export type ImageUploadProps = {
   placeholder?: string;
 };
 
-export type Authentication = {
-  password: string;
-  salt: string;
-  sessionToken: string;
-};
-
 export type UserType = {
   id: string;
   username: string;

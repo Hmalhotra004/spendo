@@ -22,6 +22,7 @@ interface AuthStore {
   ) => Promise<result>;
   checkAuth: () => void;
   logout: () => void;
+  setUser: (user: UserType) => void;
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
@@ -109,6 +110,12 @@ const useAuthStore = create<AuthStore>((set) => ({
     await AsyncStorage.removeItem("user");
     await AsyncStorage.removeItem("token");
     set({ token: null, user: null });
+  },
+
+  setUser: async (user) => {
+    await AsyncStorage.removeItem("user");
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    set({ user: user });
   },
 }));
 

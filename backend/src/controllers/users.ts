@@ -42,7 +42,7 @@ export const updateUser = async (req: Request, res: Response): Promise<any> => {
     user.username = username;
     await user.save();
 
-    return res.status(200).json(user);
+    return res.status(200).json({ user: user });
   } catch (error) {
     console.log("UPDATE_USERS_ERROR" + error);
     return res.status(500);

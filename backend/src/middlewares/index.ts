@@ -1,6 +1,6 @@
-import { getUserBySessionToken } from "db/Users";
 import { NextFunction, Request, Response } from "express";
 import { get, merge } from "lodash";
+import { getUserBySessionToken } from "../db/Users";
 
 export const isOwner = async (
   req: Request,
@@ -35,7 +35,7 @@ export const isAuthenticated = async (
   next: NextFunction
 ) => {
   try {
-    const sessionToken = req.cookies["AUTH"];
+    const sessionToken = req.header("Authorization")?.replace("Bearer ", "");
     if (!sessionToken) {
       res.status(401).json({ message: "Unauthorzied" });
       return;

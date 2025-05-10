@@ -1,32 +1,5 @@
 import { Request, Response } from "express";
-import { deleteUserById, getUser, getUserById } from "../db/Users";
-
-export const getAllUsers = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
-  try {
-    const users = await getUser();
-
-    return res.status(200).json(users);
-  } catch (error) {
-    console.log("GET_ALL_USERS_ERROR" + error);
-    return res.status(500);
-  }
-};
-
-export const deleteUser = async (req: Request, res: Response): Promise<any> => {
-  try {
-    const { id } = req.params;
-
-    const deletedUser = await deleteUserById(id);
-
-    return res.status(200).json(deletedUser);
-  } catch (error) {
-    console.log("DELETE_USERS_ERROR" + error);
-    return res.status(500);
-  }
-};
+import { getUserById } from "../db/Users";
 
 export const updateUser = async (req: Request, res: Response): Promise<any> => {
   try {

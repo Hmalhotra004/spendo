@@ -17,7 +17,13 @@ export interface CustomButtonProps extends TouchableOpacityProps {
   children: React.ReactNode;
 }
 
-const Button = ({ children, style, onPress, loading }: CustomButtonProps) => {
+const Button = ({
+  children,
+  style,
+  onPress,
+  loading,
+  ...props
+}: CustomButtonProps) => {
   if (loading) {
     return (
       <View style={[styles.btn, style, { backgroundColor: "transparent" }]}>
@@ -30,6 +36,7 @@ const Button = ({ children, style, onPress, loading }: CustomButtonProps) => {
     <TouchableOpacity
       onPress={onPress}
       style={[styles.btn, style]}
+      {...props}
     >
       {children}
     </TouchableOpacity>

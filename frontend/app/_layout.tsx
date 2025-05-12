@@ -9,6 +9,20 @@ export default function RootLayout() {
   const segments = useSegments();
   const { checkAuth, user, token } = useAuthStore();
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchInterval: 900000,
+        refetchOnMount: true,
+        refetchOnReconnect: true,
+        refetchOnWindowFocus: true,
+        retry: 3,
+        staleTime: 900000,
+        gcTime: 900000,
+      },
+    },
+  });
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -29,8 +43,6 @@ export default function RootLayout() {
 
     return () => task.cancel();
   }, [user, token, segments, router]);
-
-  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>

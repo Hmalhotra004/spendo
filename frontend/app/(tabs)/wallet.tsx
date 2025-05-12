@@ -3,12 +3,10 @@ import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import WalletItem from "@/components/WalletItem";
 import { COLORS } from "@/constants/theme";
+import { useWallets } from "@/hooks/useWallets";
 import useAuthStore from "@/store/useAuthStore";
 import styles from "@/styles/wallet.styles";
-import { WalletType } from "@/types";
-import api from "@/utils/api";
 import { verticalScale } from "@/utils/styling";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { PlusCircle } from "phosphor-react-native";
 import React from "react";
@@ -16,21 +14,7 @@ import { FlatList, TouchableOpacity, View } from "react-native";
 
 const Wallet = () => {
   const { user, token } = useAuthStore();
-  const {
-    data: wallets,
-    isLoading,
-    isError,
-  } = useQuery<WalletType[]>({
-    queryKey: ["wallets", user?.id],
-    queryFn: async () => {
-      const response = await api.get(`/wallets/${user?.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data;
-    },
-  });
+  const { wallets, isError, isLoading } = useWallets(user?.id, token);
 
   const router = useRouter();
   const getTotalBalance = () =>

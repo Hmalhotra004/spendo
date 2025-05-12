@@ -15,6 +15,16 @@ interface WalletItemProps {
 }
 
 const WalletItem = ({ idx, router, wallet }: WalletItemProps) => {
+  function openWallet() {
+    router?.push({
+      pathname: "/(modals)/walletModal",
+      params: {
+        id: wallet._id,
+        name: wallet.name,
+        icon: wallet.icon,
+      },
+    });
+  }
   // const IconComponent = Icons[wallet.icon];
   return (
     <Animated.View
@@ -22,7 +32,10 @@ const WalletItem = ({ idx, router, wallet }: WalletItemProps) => {
         .springify()
         .damping(13)}
     >
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={openWallet}
+      >
         <View style={styles.iconContainer}>
           {/* TODO: fisme */}
           <PiggyBank />

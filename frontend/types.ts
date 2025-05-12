@@ -90,7 +90,7 @@ export type ResponseType = {
 };
 
 export type WalletType = {
-  id?: string;
+  _id?: string;
   name: string;
   amount?: number;
   totalIncome?: number;

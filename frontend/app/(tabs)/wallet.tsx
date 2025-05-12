@@ -21,7 +21,7 @@ const Wallet = () => {
     isLoading,
     isError,
   } = useQuery<WalletType[]>({
-    queryKey: ["wallets"],
+    queryKey: ["wallets", user?.id],
     queryFn: async () => {
       const response = await api.get(`/wallets/${user?.id}`, {
         headers: {
@@ -103,7 +103,7 @@ const Wallet = () => {
               <WalletItem
                 idx={index}
                 wallet={item}
-                // router={""}
+                router={router}
               />
             )}
           />
